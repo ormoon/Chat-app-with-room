@@ -6,21 +6,34 @@ const msgContainer = document.getElementById('message-container');
 const sendLocation = document.getElementById('send-location');
 
 
-const user = document.getElementById('new-user').innerHTML;
+const username = document.getElementById('new-user').innerHTML;
 const room = document.querySelector('#room').innerHTML;
 
+const active = document.querySelector("#active");
 
-// console.log("user >> ", user);
+
+
+// console.log("user >> ", username);
 // console.log("room >> ", room);
 
 
 
 socket.on("msg", msg => {
-    console.log("msg >> ", msg)
     showMessage(msg.message.text, msg.message.createdAt);
 })
 
-socket.emit("join", ({ user, room }));
+
+socket.on("aUsers", (arr) => {
+    displayActive(arr);
+})
+
+
+socket.emit("join", ({ username, room }), (error) => {
+    if (error) {
+        alert(error);
+        location.href = '/chat';   //directing to homepage
+    }
+});
 
 socket.on("locationmsg", msg => {
     console.log("message >> ", msg)
@@ -110,4 +123,14 @@ function displayTime(time) {
     msgContainer.appendChild(s)
 }
 
+
+function displayActive(arr) {
+    active.innerHTML = ''; //for clearing since previous user will shown thus
+    for (let i = 0; i < arr.length; i++) {
+        var li = document.createElement('li');
+        var linkText = document.createTextNode(arr[i].username);
+        li.appendChild(linkText);
+        active.appendChild(li);
+    }
+}
 

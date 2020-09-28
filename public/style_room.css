@@ -54,6 +54,8 @@ html {
   padding: 5px 28px;
 }
 
+
+
 #send-container {
   position: absolute;
   bottom: 10px;
@@ -105,10 +107,4 @@ html {
   position: absolute;
   bottom: 17%;
   left: 17%;
-}
-
-
-#active a:hover{
- text-decoration: none;
- color: red;
 }

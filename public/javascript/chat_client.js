@@ -7,12 +7,21 @@ const sendLocation = document.getElementById('send-location');
 
 
 const newUser = document.getElementById('new-user');
-
+const active = document.querySelector("#active");
 
 
 let name = prompt("Enter your name");
 socket.emit("new-user", name);
 
+
+socket.on("aUser", (arr) => {
+    displayActive(arr);
+})
+
+socket.on("errors", (error) => {
+    alert(error)
+    location.href = '/chat';
+})
 
 socket.on("messages", msg => {
     console.log(msg)
@@ -72,13 +81,13 @@ document.querySelector('#send-location').addEventListener('click', () => {
     })
 })
 
-socket.on("user-connected", data => {
-    showMessage(`${data.name} connected`, data.time);
-})
+// socket.on("user-connected", data => {
+//     showMessage(`${data.name} connected`, data.time);
+// })
 
-socket.on("user-disconnected", data => {
-    showMessage(`${data.name} disconnected`, data.time);
-})
+// socket.on("user-disconnected", data => {
+//     showMessage(`${data.name} disconnected`, data.time);
+// })
 
 
 function showMessage(msg, time) {
@@ -110,4 +119,16 @@ function displayTime(time) {
 }
 
 
+function displayActive(arr) {
+    active.innerHTML = ''; //for clearing since previous user will shown thus
+    for (let i = 0; i < arr.length; i++) {
+        var a = document.createElement('a');
+        a.href = `#`;
+        var linkText = document.createTextNode(arr[i].username);
+        a.appendChild(linkText);
+        active.appendChild(a);
+        var br = document.createElement('br');
+        active.appendChild(br);
+    }
+}
 

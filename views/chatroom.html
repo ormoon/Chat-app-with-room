@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./images/chat.png" type="image/x-icon" />
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./style_room.css" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -14,7 +14,7 @@
     <title>Document</title>
   </head>
   <body>
-    <div id="message-container">
+    <div id="container">
       <!-- navbar -->
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#"
@@ -51,6 +51,14 @@
         </div>
       </nav>
 
+      <div class="sidenav">
+        <h2>Active</h2>
+        <ul id="active">
+          
+        </ul>
+      </div>
+      <div id="message-container"></div>
+
       <div id="new-user" hidden>{{name}}</div>
 
       <form id="send-container">
@@ -59,6 +67,7 @@
         <button id="send-location">Share Location</button>
       </form>
     </div>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.28.0/moment.min.js"></script>
     <script src="/javascript/room_client.js"></script>
